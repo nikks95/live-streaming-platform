@@ -1,8 +1,16 @@
+ROOT_DIR := $(realpath $(dir $(lastword $(MAKEFILE_LIST)))/..)
+
+COMPOSE_FILE := $(ROOT_DIR)/infra/docker-compose.yml
+
+DOCKER_COMPOSE := $(shell command -v docker-compose 2>/dev/null || echo "docker compose")
+
+.PHONY: up down logs
+
 up:
-	docker-compose -f infra/docker-compose.yml up -d
+	$(DOCKER_COMPOSE)  -f $(COMPOSE_FILE) up -d
 
 down:
-	docker-compose -f infra/docker-compose.yml down
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) down
 
 logs:
-	docker-compose -f infra/docker-compose.yml logs -f
+	$(DOCKER_COMPOSE) -f $(COMPOSE_FILE) logs -f
