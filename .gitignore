@@ -1,0 +1,74 @@
+# ------------------------------
+# Node / Backend
+# ------------------------------
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.local
+.env.*.local
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ------------------------------
+# Frontend (React / TS)
+# ------------------------------
+frontend/node_modules/
+frontend/build/
+frontend/.env
+frontend/.env.local
+
+# ------------------------------
+# Python (in case you add scripts)
+# ------------------------------
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pycache/
+*.egg-info/
+.eggs/
+.venv/
+venv/
+
+# ------------------------------
+# Docker / Infra
+# ------------------------------
+*.pid
+*.seed
+*.pid.lock
+infra/minio/data/
+infra/postgres/data/
+infra/redis/data/
+infra/kafka/data/
+infra/*/logs/
+
+# ------------------------------
+# Kubernetes / Helm
+# ------------------------------
+*.crt
+*.key
+*.kubeconfig
+*.helmignore
+chartmuseum/
+charts/
+tmpcharts/
+values-*.yaml
+
+# ------------------------------
+# System files
+# ------------------------------
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.bak
+*.tmp
+.idea/
+.vscode/
