@@ -1,3 +1,13 @@
+# 🎬 Live Streaming Platform — Architecture (Phase 0)
+
+This document describes the **high-level architecture** of the live streaming platform.  
+At this stage (Phase 0), it’s a placeholder for what will evolve in later phases.
+
+---
+
+## 📐 High-Level System Design
+
+```mermaid
 flowchart LR
   subgraph Ingest
     Admin[Admin - Select Video] -->|Local File / FFmpeg push| IngestServer[nginx-rtmp / FFmpeg]
@@ -34,3 +44,4 @@ flowchart LR
     AllServices --> Loki[(Loki Logs)]
     Prometheus --> Grafana[(Grafana Dashboards)]
   end
+
