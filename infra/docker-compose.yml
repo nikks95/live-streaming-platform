@@ -1,18 +1,33 @@
 version: "3.9"
 
 services:
-  backend:
-    build: ../backend
-    container_name: backend
+  nginx: 
+    image: alfg/nginx-rtmp:latest
+    container_name: nginx
     ports:
-      - "8080:8080"
+      - "1935:1935" # RTMP ingestion port
+      - "8080:80"  #HLS over HTTP port
     volumes:
-      - ../backend:/app
-  
+      - ./nginx/nginx.conf:/home/nikhil/projects/mini-live-streaming/live-streaming-platform/infra/nginx/nginx.conf
+      - ./nginx/hls:/opt/data/hls # local HLS output storage
+
+  ffmpeg:
+    image: jrottenberg/ffmpeg:4.4-alpine
+    container_name: ffmpeg_worker
+    depends_on:
+      - nginx
+    volumes:
+      - ./infra/hls:/hls
+      - ./videos:/videos    #local folder with sample videos
+    entrypoint: ["/bin/sh", "-c"]
+    #command will be injected at runtime to handle different video sizes
+    command: ["while true; do sleep 3600; done"]
+
   frontend:
-    build: ../frontend
+    build: ./frontend
     container_name: frontend
-    ports: 
+    ports:
       - "3000:3000"
-    volumes:
-      - ../frontend:/usr/src/app
+    volumes: 
+      - ./frontend:/usr/src/app
+      
